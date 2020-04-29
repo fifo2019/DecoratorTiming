@@ -1,4 +1,4 @@
-from decorator import Stopwatch
+from decorator import Stopwatch, StopwatchTwo
 
 
 def main():
@@ -6,9 +6,10 @@ def main():
     try:
         num_repet = int(input('Введите количество повторений программы : '))
         element = int(input('Введите номер искомого элемента : '))
-    except TypeError:
+    except ValueError:
         print("Вы ввели не число..")
     else:
+        print("\t*****   Через декоратор   *****")
         @Stopwatch(num_repet)
         def fibonacci(element):
             a = 0
@@ -18,6 +19,10 @@ def main():
             return f"{element} элемент последовательности равен {a}"
 
         print(fibonacci(element))
+
+        print("\t*****   Через контекстный менеджер   *****")
+        with StopwatchTwo(num_repet) as st:
+            print(fibonacci(element))
 
 
 if __name__ == '__main__':
